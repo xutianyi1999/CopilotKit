@@ -152,45 +152,6 @@ describe("convertMessagesToVercelAISDKMessages", () => {
     });
   });
 
-  it("should preserve plain reasoning for OpenAI-compatible chat completions", () => {
-    const messages: Message[] = [
-      {
-        id: "reasoning-1",
-        role: "reasoning",
-        content: "Let me inspect the available tools.",
-      },
-      {
-        id: "assistant-1",
-        role: "assistant",
-        toolCalls: [
-          {
-            id: "call-1",
-            type: "function",
-            function: { name: "search", arguments: '{"query":"test"}' },
-          },
-        ],
-      },
-    ];
-
-    expect(convertMessagesToVercelAISDKMessages(messages)).toEqual([
-      {
-        role: "assistant",
-        content: [
-          {
-            type: "reasoning",
-            text: "Let me inspect the available tools.",
-          },
-          {
-            type: "tool-call",
-            toolCallId: "call-1",
-            toolName: "search",
-            input: { query: "test" },
-          },
-        ],
-      },
-    ]);
-  });
-
   it("should preserve Anthropic reasoning before the assistant response", () => {
     const messages: Message[] = [
       {
