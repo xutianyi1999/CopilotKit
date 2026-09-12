@@ -65,6 +65,7 @@
   },
   "scripts": {
     "build": "tsdown && node ../../scripts/deprecations/v1-dist-notices.mjs --entrypoint runtime,runtime-langgraph",
+    "prepare": "pnpm run build",
     "dev": "tsdown --watch",
     "test": "vitest run",
     "test:watch": "vitest",
