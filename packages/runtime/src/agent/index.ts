@@ -508,11 +508,13 @@ export function convertMessagesToVercelAISDKMessages(
   for (const message of messages) {
     if (message.role === "reasoning") {
       const providerOptions = reasoningMessageProviderOptions(message);
-      pendingReasoning.push({
-        type: "reasoning",
-        text: message.content,
-        ...(providerOptions ? { providerOptions } : {}),
-      });
+      if (providerOptions) {
+        pendingReasoning.push({
+          type: "reasoning",
+          text: message.content,
+          providerOptions,
+        });
+      }
       continue;
     }
 

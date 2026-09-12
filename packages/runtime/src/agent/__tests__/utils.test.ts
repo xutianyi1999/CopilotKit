@@ -152,6 +152,24 @@ describe("convertMessagesToVercelAISDKMessages", () => {
     });
   });
 
+  it("should ignore reasoning without provider metadata", () => {
+    const messages: Message[] = [
+      {
+        id: "reasoning-1",
+        role: "reasoning",
+        content: "Reasoning without provider metadata.",
+      },
+      { id: "assistant-1", role: "assistant", content: "answer" },
+    ];
+
+    expect(convertMessagesToVercelAISDKMessages(messages)).toEqual([
+      {
+        role: "assistant",
+        content: [{ type: "text", text: "answer" }],
+      },
+    ]);
+  });
+
   it("should preserve Anthropic reasoning before the assistant response", () => {
     const messages: Message[] = [
       {
