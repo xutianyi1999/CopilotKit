@@ -30,7 +30,7 @@
     "verify:channels-umbrella:registry": "nx run @copilotkit/channels:build && tsx scripts/release/verify-channels-umbrella.ts --registry",
     "verify:angular-package": "nx run-many -t build,check-types,test,publint,attw --projects=@copilotkit/angular && tsx scripts/release/verify-angular-package.ts",
     "verify:runtime-package": "nx run @copilotkit/runtime:build && tsx scripts/release/verify-runtime-package.ts",
-    "prepare": "lefthook install",
+    "prepare": "node scripts/install-git-hooks.mjs",
     "graph": "nx graph",
     "publint": "nx run-many -t publint --projects=packages/**",
     "attw": "nx run-many -t attw --projects=packages/**",
